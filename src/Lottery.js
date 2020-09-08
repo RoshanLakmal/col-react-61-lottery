@@ -10,14 +10,26 @@ class Lottery extends Component{
     }
     constructor(props){
         super(props);
-        this.state = {nums: Array.from({ length: this.props.numBalls})};
+        this.state = {nums: []};
+        // this.state = {nums: Array.from({ length: this.props.numBalls})};
         this.handleClick = this.handleClick.bind(this);
 
     }
+
+    increamentScore(curState){
+        let idx = Math.floor(Math.random() * this.props.maxNum) + 1;
+        return { nums: [...curState.nums, idx] };
+    }
+
     generate(){
-       this.setState(curState => ({
-           nums: curState.nums.map(n => Math.floor(Math.random() * this.props.maxNum) + 1)
-       }));
+    //    this.setState(curState => ({
+    //        nums: curState.nums.push(Math.floor(Math.random() * this.props.maxNum) + 1)
+    //    }));
+    this.setState({nums: []});
+    for(let i=0;i<this.props.numBalls;i++){
+        this.setState(this.increamentScore);
+    }
+       
     }
 
     handleClick(){
